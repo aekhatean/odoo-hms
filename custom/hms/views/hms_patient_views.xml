@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <record id="hms_patient_form_view" model="ir.ui.view">
+            <field name="name">Hms Patient Form View</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="first_name" required="True"/>
+                        <field name="last_name" required="True"/>
+                        <field name="email"/>
+                        <field name="customer_id" string="Customer"/>
+                    </group>
+                    <group>
+                        <field name="birth_date"/>
+                    </group>
+                    <group>
+                        <field name="history" attrs="{'invisible': [('age', '>', '50')]}"/>
+                        <field name="cr_ratio" attrs="{'required': [('pcr', '=', True)]}"/>
+                        <field name="state"/>
+                        <field name="pcr" widget="checkbox"/>
+                    </group>
+                    <group>
+                        <field name="gender"/>
+                        <field name="age"/>
+                    </group>
+                    <group>
+                        <field name="image" widget="image"/>
+                    </group>
+                    <group>
+                        <field name="address"/>
+                    </group>
+                    <group>
+                        <field name="department_id" domain="[('is_opened', '=', True)]"/>
+                        <field name="doctors_ids" widget="many2many_tags" attrs="{'readonly': [('department_id', '=', False)]}"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="hms_patient_tree_view" model="ir.ui.view">
+            <field name="name">Hms Patient Tree View</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="email"/>
+                    <field name="customer_id" string="Customer"/>
+                    <field name="birth_date"/>
+                    <field name="history" />
+                    <field name="state"/>
+                    <field name="gender"/>
+                    <field name="pcr" />
+                    <field name="cr_ratio"/>
+                    <field name="image"/>
+                    <field name="address"/>
+                    <field name="age"/>
+                    <field name="department_id" />
+                    <field name="doctors_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_patients" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">hms.patient</field>
+        </record>
+
+        <menuitem id="hms_root_menu" name="hms" />
+        <menuitem id="hms_patient_menu" parent="hms_root_menu" action="action_patients" />
+    </data>
+</odoo>

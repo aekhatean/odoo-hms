@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <!--Form view-->
+        <record id="customer_form_view_inherit" model="ir.ui.view">
+            <field name="name">Customer From View - Inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="country_id" position="after">
+                    <group>
+                        <field name="related_patient_id" string="patient ID"/>
+                    </group>
+                </field>
+                <field name="same_vat_partner_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!--List view-->
+        <record id="customer_tree_view_inherit" model="ir.ui.view">
+            <field name="name">Customer From View - Inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="email" position="after">
+                    <field name="website" string="Website"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
