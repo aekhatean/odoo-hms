@@ -25,7 +25,7 @@ class HmsPatient(models.Model):
         ],
         default="Undetermined"
     )
-    gender = fields.Selection(
+    blood_type = fields.Selection(
         [
             ('O+', 'O+'),
             ('O-', 'O-'),
@@ -45,6 +45,7 @@ class HmsPatient(models.Model):
     department_id = fields.Many2one(comodel_name='hms.department')
     doctors_ids = fields.Many2many(comodel_name='hms.doctor')
     customer_id = fields.Many2one(comodel_name="res.partner")
+    logs = fields.One2many(comodel_name='hms.patient_log')
 
     _sql_constraints = [
         ('UNIQUE_EMAIL_CONSTRAINT', 'unique(email)', 'This email already exists')
@@ -76,3 +77,7 @@ class HmsPatient(models.Model):
             match = re.fullmatch(regex, self.email)
             if match is None:
                 raise ValidationError('Not a valid E-mail ID.')
+
+    @api.onchange('state')
+    def _state_logger(self):
+        self.env['hms.patient_log'].create({'desc': "A change made to this patient's state", 'patient_id': self.id})

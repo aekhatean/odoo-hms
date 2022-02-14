@@ -1,5 +1,6 @@
 from odoo import models, fields
 
+
 class HmsPatient(models.Model):
     _name = "hms.doctor"
     _rec_name = "first_name"

@@ -11,8 +11,7 @@ class HmsInheritCustomers(models.Model):
         if self.env['hms.patient'].search([('email', '=', self.email)]):
             raise UserError('Patient email and customer email cannot be the same.')
 
-    @api.constrains('related_patient_id')
-    def _check_related_patients(self):
+    def unlink(self):
         for rec in self:
-            if len(rec.related_patient_id) > 0:
+            if rec.related_patient_id:
                 raise UserError('You cannot delete customer with related patient(s)')

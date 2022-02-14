@@ -21,7 +21,7 @@
                         <field name="pcr" widget="checkbox"/>
                     </group>
                     <group>
-                        <field name="gender"/>
+                        <field name="blood_type"/>
                         <field name="age"/>
                     </group>
                     <group>
@@ -32,7 +32,7 @@
                     </group>
                     <group>
                         <field name="department_id" domain="[('is_opened', '=', True)]"/>
-                        <field name="doctors_ids" widget="many2many_tags" attrs="{'readonly': [('department_id', '=', False)]}"/>
+                        <field name="doctors_ids" widget="many2many_tags" attrs="{'readonly': [('department_id', '=', False)]}" groups="hms.hms_manager_group"/>
                     </group>
                 </form>
             </field>
@@ -50,7 +50,7 @@
                     <field name="birth_date"/>
                     <field name="history" />
                     <field name="state"/>
-                    <field name="gender"/>
+                    <field name="blood_type"/>
                     <field name="pcr" />
                     <field name="cr_ratio"/>
                     <field name="image"/>
