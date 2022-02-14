@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <template id="hms_patient_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="rec">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div>
+                                <h1 color="red">Patient Status Report</h1>
+                                <b>Name: </b><span t-esc="rec.first_name"/> <span t-esc="rec.last_name"/>
+                                <b>Age: </b><span t-esc="rec.age"/>
+                                <b>Department: </b><span t-esc="rec.department_id"/>
+                                <b>Doctors: </b><t t-foreach="rec.doctors_ids" t-as="doctor">
+                                    <span t-esc="doctor"/>,
+                                </t>
+                            </div>
+                            <div>
+                                <span t-esc="rec.image"/>
+                                <b>Birthdate: </b><span t-esc="rec.birth_date"/>
+                                <b>Pcr: </b><span t-esc="rec.cr_ratio"/>
+                                <b>Blood type: </b><span t-esc="rec.blood_type"/>
+                                <b>Email: </b><span t-esc="rec.email"/>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <th>
+                                <td>User</td>
+                                <td>Date</td>
+                                <td>Info</td>
+                            </th>
+                            <t t-foreach="rec.logs" t-as="log">
+                                <tr>
+                                    <td><span t-esc="log.create_uid"/></td>
+                                    <td><span t-esc="log.create_date"/></td>
+                                    <td><span t-esc="log.desc"/></td>
+                                </tr>
+                            </t>
+                        </table>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
